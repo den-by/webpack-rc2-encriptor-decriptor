@@ -1,9 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Getting Started</title>
+    <meta charset="UTF-8">
+    <title>16ИТД Буяков Денис Сергеервич</title>
+    <style>
+        .flex > * > * {
+            margin: 3px
+        }
+
+        label {
+            display: block;
+        }
+
+        textarea {
+            display: block;
+        }
+
+        input {
+            display: block;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        button {
+            display: block;
+        }
+    </style>
 </head>
 <body>
+<label>Секрктная фраза
+    <input id="password" type="text">
+</label>
+<div class="flex">
+    <div>
+        <label> шифруемый фаил
+            <input id="decryptFile" type="file">
+        </label>
+        <label> Содрержимое файла
+            <textarea id="decryptArea"></textarea>
+        </label>
+        <button id='encryptButton'>Шифровать&gt;&gt;&gt;</button>
+        <button id='downloadDecryptArea'>Скачать</button>
+    </div>
+    <div>
+        <label> шифруемый фаил
+            <input id="encryptFile" type="file">
+        </label>
+        <label> Содрержимое файла
+            <textarea id="encryptArea"></textarea>
+        </label>
+        <button id='decryptButton'>&lt;&lt;&lt;Расшифровать</button>
+        <button id='downloadEncryptArea'>Скачать</button>
+    </div>
+</div>
+
+<script src="./../src/rc2.js"></script>
 <script src="main.js"></script>
+<!--<script src="../src/crypto.js"></script>-->
+<!--<script src="../src/download.js"></script>-->
+<!--<script src="../src/readUserBinaryFile.js"></script>-->
+<!--<script src="../src/index.js"></script>-->
+
 </body>
 </html>

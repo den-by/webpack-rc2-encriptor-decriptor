@@ -1,12 +1,42 @@
-import _ from 'lodash';
+// import './rc2'
+import Crypto from './crypto'
+import download from './download'
+import readUserBinaryFile from './readUserBinaryFile'
 
-function component() {
-    const element = document.createElement('div');
+const decryptArea = document.getElementById("decryptArea");
+const encryptArea = document.getElementById("encryptArea");
+const passwordElement = document.getElementById('password');
 
-    // Lodash, currently included via a script, is required for this line to work
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+document.getElementById("encryptButton").onclick = function () {
+    const decryptFileData = decryptArea.value;
+    const encryptFileData = Crypto.encryptRC2(decryptFileData, passwordElement.value);
+    encryptArea.value = encryptFileData;
+};
 
-    return element;
-}
+document.getElementById("decryptButton").onclick = function () {
+    const encryptFileData = encryptArea.value;
+    const decryptFileData = Crypto.decryptRC2(encryptFileData, passwordElement.value);
+    decryptArea.value = decryptFileData;
+};
 
-document.body.appendChild(component());
+document.querySelector('#decryptFile').addEventListener('change', async function () {
+    const fileStream = this.files[0];
+    const fileData = await readUserBinaryFile(fileStream);
+    decryptArea.value = fileData;
+}, false);
+
+document.querySelector('#encryptFile').addEventListener('change', async function () {
+    const fileStream = this.files[0];
+    const fileData = await readUserBinaryFile(fileStream);
+    encryptArea.value = fileData;
+}, false);
+
+document.getElementById("downloadDecryptArea").onclick = function () {
+    const decryptFileData = decryptArea.value;
+    download(decryptFileData, 'decryptFileData', 'rc');
+};
+
+document.getElementById("downloadEncryptArea").onclick = function () {
+    const encryptFileData = encryptArea.value;
+    download(encryptFileData, 'encryptFileData', 'rc');
+};
